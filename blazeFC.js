@@ -6,6 +6,7 @@ const rl = readline.createInterface({
 })
 
 let Jogador = []
+let times = []
 exibirMenu()
 
 function exibirMenu() {
@@ -15,9 +16,8 @@ Menu:
 2. Listar Jogadores
 3. Alterar Jogador
 4. Excluir Jogador
-5. Criar e gerenciar times
-6. Registrar partidas e resultados
-7. Estatísticas dos jogadores
+5. Criar times
+6. Sair
 	`)
 
 	rl.question('Escolha uma opção: ', (opcao) => {
@@ -35,18 +35,9 @@ Menu:
 				excluirJogador()
 				break
 			case '5':
-				criarGerenciarTimes()
-				break
-            case '6':
-				registrarPartidas()
-				break
-            case '7':
-                estatisticasJogadores()
-                    break
-            case '8':
-                excluirJogador()
-                    break                
-			case '9':
+				listarTime()
+				break           
+			case '6':
 				rl.close()
 				break
 			default:
@@ -79,9 +70,16 @@ function inserirJogador() {
 }
 //listar jogadores
 function listarJogadores(){
-    for(let i=0;i < Jogador.length;i++){
-    console.log(Jogador[i])
-}
+    console.log('Lista de Jogadores:')
+        Jogador.forEach((jogadores, index) => {
+        console.log(`${index + 1}. Nome:${jogadores.nome}
+   Posição: ${jogadores.posição} 
+   Número: ${jogadores.número} 
+   Equipe: ${jogadores.equipe}
+   Pontuaçao: ${jogadores.pontuação}
+   pé dominante: ${jogadores.péDominante}
+   `)
+})
 exibirMenu()
 }
 
@@ -147,11 +145,25 @@ function excluirJogador(){
    
 
 }
-//criar e gerenciar times
-function criarGerenciarTimes() {
-    if (Jogador.length < 2) {
-        console.log('É necessário ter pelo menos 5 jogadores para criar times.')
-        exibirMenu()
-        return
+//criar times
+function listarTime() {
+    if(Jogador.length == 0){
+        console.log('Nada cadastrado!')
+         exibirMenu()
+        }else{
+            console.log('Time:')
+            if (Jogador.length == 2){
+                for(let i = 0; i < Jogador.length ; i++){
+                    times.push(Jogador[i].nome)
+                }
+                times.forEach((time, index) => {
+                console.log(`${index + 1}. ${time}`)
+                })
+                exibirMenu()
+            }else{
+                console.log('Não é possível formar o time, precisa de 5 jogadores!')
+                exibirMenu()
+            }
+        }
     }
-}
+ 
