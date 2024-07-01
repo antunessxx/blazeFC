@@ -70,7 +70,59 @@ exibirMenu()
                  console.log('Editado com sucesso')
                  exibirMenu() 
 ```
-              
+### função excluir
+
+```function excluirJogador(){
+    if(Jogador.length == 0){
+       console.log('Nada cadastrado!')
+       exibirMenu()
+    }else{
+       console.log('Lista de jogadores')
+      Jogador.forEach((Jogador, index) =>{
+       console.log(`${index + 1}. ${Jogador.nome}`)
+       })
+       rl.question('Digite o número do elemento que deseja remover:' , (numero) => {
+           if (numero > 0 && numero <= Jogador.length){
+               Jogador.splice(numero - 1, 1)
+            console.log('Elemento removido com sucesso!')
+            exibirMenu()
+           }else{
+               console.log('Numero inválido,tente novamente!')
+               exibirMenu()
+           }
+       })
+    }
+   
+
+}
+```
+
+### função criar times
+```function listarTime() {
+    if(Jogador.length == 0){
+        console.log('Nada cadastrado!')
+         exibirMenu()
+        }else{
+            console.log('Time:')
+            if (Jogador.length == 2){
+                for(let i = 0; i < Jogador.length ; i++){
+                    times.push(Jogador[i].nome)
+                }
+                times.forEach((time, index) => {
+                console.log(`${index + 1}. ${time}`)
+                })
+                exibirMenu()
+            }else{
+                console.log('Não é possível formar o time, precisa de 5 jogadores!')
+                exibirMenu()
+            }
+        }
+    }
+```
+
+### Dificuldades:
+
+A maior dificuldade foi criar a função de criar times,mas fora isso não tive muita dificuldade.
                 
 
 
